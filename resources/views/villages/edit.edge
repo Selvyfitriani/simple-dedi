@@ -1,12 +1,12 @@
 @layout('main')
 
 @section('content')
-    <h1>Add Village</h1>
-    <form action="/villages" method="POST">
+    <h1>Edit Village</h1>
+    <form action="{{ '/villages/' + village.id + '?_method=PUT' }}" method="POST">
         {{ csrfField() }}
         <div class="form-group">
             <input type="text" name="name" class=form-control placeholder="Name"
-            value="{{ old('name', '') }}">
+            value="{{ village.name }}">
             {{ elIf('<span class="text-danger">$self</span>', getErrorFor('name'), hasErrorFor('name'))}}
         </div>
 

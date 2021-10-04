@@ -22,6 +22,10 @@ Route.get('/villages', 'VillageController.index')
 
 Route.get('/villages/create', 'VillageController.create')
 
+Route.get('/villages/edit/:id', 'VillageController.edit')
+
 Route.get('/villages/:id', 'VillageController.detail')
 
 Route.post('/villages', 'VillageController.store')
+
+Route.put('/villages/:id','VillageController.update')

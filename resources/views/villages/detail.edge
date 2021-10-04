@@ -1,6 +1,8 @@
 @layout('main')
 
 @section('content')
-    <h1>{{ village.name }}</h1>
     <a href="/villages"> Go Back </a>
+    <h1>{{ village.name }}</h1>
+
+    <a href="/villages/edit/{{ village.id}}" class="btn btn-dark d-block float-left">Edit</a>
 @endsection

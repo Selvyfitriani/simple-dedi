@@ -1,5 +1,7 @@
 'use strict'
 
+const { post } = require("@adonisjs/framework/src/Route/Manager");
+
 const Village = use('App/Models/Village')
 
 const { validate } = use('Validator')
@@ -47,6 +49,37 @@ class VillageController {
 
         return response.redirect('/villages')
     }
+
+    async edit({ params, view }) {
+        const village = await Village.find(params.id)
+
+        return view.render('villages.edit', {
+            village: village
+        })
+    }
+
+    async update({ params, request, response, session }) {
+        const validation = await validate(request.all(), {
+            name: 'required|min:3|max:255'
+        })
+
+        if(validation.fails()) {
+            session.withErrors(validation.messages()).flashAll()
+
+            return response.redirect('back')
+        }
+
+        const village = await Village.find(params.id)
+
+        village.name = request.input('name')
+
+        await village.save()
+
+        session.flash({ notification: 'Post updated!' })
+
+        return response.redirect('/villages')
+    }
+
 }
     
 module.exports = VillageController
