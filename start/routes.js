@@ -19,3 +19,5 @@ const Route = use('Route')
 Route.on('/').render('welcome')
 
 Route.get('/villages', 'VillageController.index')
+
+Route.get('/villages/:id', 'VillageController.detail')

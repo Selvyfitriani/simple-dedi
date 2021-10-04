@@ -4,7 +4,7 @@
     <h1>Villages</h1>
     <ul>
         @each(village in villages)
-            <li class="list-group-item"> {{village.name}} </li>
+            <li class="list-group-item"><a href="/villages/{{village.id}}"> {{village.name}} </li>
         @endeach
     </ul>
 @endsection
