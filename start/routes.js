@@ -29,3 +29,5 @@ Route.get('/villages/:id', 'VillageController.detail')
 Route.post('/villages', 'VillageController.store')
 
 Route.put('/villages/:id','VillageController.update')
+
+Route.delete('/villages/:id','VillageController.delete')

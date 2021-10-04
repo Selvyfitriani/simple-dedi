@@ -80,6 +80,16 @@ class VillageController {
         return response.redirect('/villages')
     }
 
+    async delete({ params, session, response }) {
+        const village = await Village.find(params.id)
+
+        await village.delete() 
+
+        session.flash({ notification: 'Post deleted!' })
+
+        return response.redirect('/villages')
+    }
+
 }
     
 module.exports = VillageController
