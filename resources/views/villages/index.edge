@@ -1,5 +1,10 @@
-<ul>
-    @each(village in villages)
-        <li> {{village.name}} </li>
-    @endeach
-</ul>
+@layout('main')
+
+@section('content')
+    <h1>Villages</h1>
+    <ul>
+        @each(village in villages)
+            <li class="list-group-item"> {{village.name}} </li>
+        @endeach
+    </ul>
+@endsection
