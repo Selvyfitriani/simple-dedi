@@ -31,3 +31,8 @@ Route.post('/villages', 'VillageController.store')
 Route.put('/villages/:id','VillageController.update')
 
 Route.delete('/villages/:id','VillageController.delete')
+
+// auth
+Route.get('/register', 'RegisterController.show')
+
+Route.post('/register', 'RegisterController.register')
