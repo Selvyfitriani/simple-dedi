@@ -1,14 +1,13 @@
 'use strict'
 
+const Post = use('App/Models/Village')
+
 class VillageController {
     async index({ view }) {
-        const villages = [
-            {name: 'Village 1'},
-            {name: 'Village 2'}
-        ]
-
+        const villages = await Post.all();
+        
         return view.render('villages.index', {
-            villages: villages
+            villages: villages.toJSON()
         })    
     } 
 }
