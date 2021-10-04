@@ -2,6 +2,9 @@
 
 @section('content')
     <h1>Villages</h1>
+    @if(old('notification'))
+        <div class="alert danger">{{ old('notification') }}</div>
+    @endif
     <ul>
         @each(village in villages)
             <li class="list-group-item"><a href="/villages/{{village.id}}"> {{village.name}} </li>

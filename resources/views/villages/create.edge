@@ -1,0 +1,15 @@
+@layout('main')
+
+@section('content')
+    <h1>Add Villages</h1>
+    <form action="/villages" method="POST">
+        {{ csrfField() }}
+        <div class="form-group">
+            <input type="text" name="name" class=form-control placeholder="Name"
+            value="{{ old('name', '') }}">
+            {{ elIf('<span class="text-danger">$self</span>', getErrorFor('name'), hasErrorFor('name'))}}
+        </div>
+
+        <button class="btn primary" type="submit">Submit</button>
+    </form>
+@endsection
