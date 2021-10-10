@@ -18,21 +18,17 @@ const Route = use('Route')
 
 Route.on('/').render('welcome')
 
-Route.get('/villages', 'VillageController.index')
+Route.group(() => {
+    Route.get('/villages', 'VillageController.index')
+    Route.get('/villages/create', 'VillageController.create')
+    Route.get('/villages/edit/:id', 'VillageController.edit')
+    Route.get('/villages/:id', 'VillageController.detail')
+    Route.post('/villages', 'VillageController.store')
+    Route.put('/villages/:id','VillageController.update')
+    Route.delete('/villages/:id','VillageController.delete')
+})
 
-Route.get('/villages/create', 'VillageController.create')
-
-Route.get('/villages/edit/:id', 'VillageController.edit')
-
-Route.get('/villages/:id', 'VillageController.detail')
-
-Route.post('/villages', 'VillageController.store')
-
-Route.put('/villages/:id','VillageController.update')
-
-Route.delete('/villages/:id','VillageController.delete')
-
-// auth
-Route.get('/register', 'RegisterController.show')
-
-Route.post('/register', 'RegisterController.register')
+Route.group(() => {
+    Route.get('/register', 'RegisterController.show')
+    Route.post('/register', 'RegisterController.register')
+})
