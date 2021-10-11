@@ -20,15 +20,12 @@ Route.on('/').render('welcome')
 
 Route.group(() => {
     Route.get('/villages', 'VillageController.index')
-    Route.get('/villages/create', 'VillageController.create')
-    Route.get('/villages/edit/:id', 'VillageController.edit')
     Route.get('/villages/:id', 'VillageController.detail')
-    Route.post('/villages', 'VillageController.store')
-    Route.put('/villages/:id','VillageController.update')
-    Route.delete('/villages/:id','VillageController.delete')
+    Route.post('/villages/create', 'VillageController.create')
+    Route.put('/villages/update','VillageController.update')
+    Route.delete('/villages/delete','VillageController.delete')
 })
 
 Route.group(() => {
-    Route.get('/register', 'RegisterController.show')
-    Route.post('/register', 'RegisterController.register')
+     Route.post('/users/register', 'RegisterController.register')
 })

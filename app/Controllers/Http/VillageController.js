@@ -1,91 +1,72 @@
 'use strict'
 
-const { post } = require("@adonisjs/framework/src/Route/Manager");
+const { url } = require("@adonisjs/framework/src/Route/Manager");
 
 const Village = use('App/Models/Village')
+
 
 const { validate } = use('Validator')
 
 class VillageController {
-    async index({ view }) {
+    async index() {
         const villages = await Village.all();
         
-        return view.render('villages.index', {
-            villages: villages.toJSON()
-        })    
+        return {villages: villages.toJSON()}
     } 
 
-    async detail({ params, view }) {
+    async detail({ params }) {
         const village = await Village.find(params.id)
 
-        return view.render('villages.detail', {
-            village: village
-        })
+        return { village: village }
     }
 
-    async create({ view }) {
-        return view.render('villages.create')
-    }
-
-    async store({ request, response, session }) {
+    async create({ request, response }) {
         // Validate input
         const validation = await validate(request.all(), {
             name: 'required|min:3|max:255'
         })
 
         if(validation.fails()) {
-            session.withErrors(validation.messages()).flashAll()
-
-            return response.redirect('back')
+            return response.badRequest("Use correct params")
         }
-
+        
         const village = new Village()
-
         village.name = request.input('name')
 
         await village.save()
 
-        session.flash({ notification: 'Village added' })
-
-        return response.redirect('/villages')
+        const url_target = '/villages/' + village.id
+        return response.redirect(url_target)
     }
 
-    async edit({ params, view }) {
-        const village = await Village.find(params.id)
-
-        return view.render('villages.edit', {
-            village: village
-        })
-    }
-
-    async update({ params, request, response, session }) {
+    async update({ request, response }) {
         const validation = await validate(request.all(), {
+            id: 'required',
             name: 'required|min:3|max:255'
         })
 
         if(validation.fails()) {
-            session.withErrors(validation.messages()).flashAll()
-
-            return response.redirect('back')
+            return response.badRequest("Use correct params")
         }
 
-        const village = await Village.find(params.id)
+        const id = request.input("id")
+        const village = await Village.find(id)
 
-        village.name = request.input('name')
+        village.merge(request.all())
 
         await village.save()
 
-        session.flash({ notification: 'Post updated!' })
-
-        return response.redirect('/villages')
+        const url_target = '/villages/' + village.id
+        return response.redirect(url_target)
     }
 
-    async delete({ params, session, response }) {
-        const village = await Village.find(params.id)
+    async delete({ request, response }) {
+        const id = request.input("id")
+        const village = await Village.find(id)
 
-        await village.delete() 
-
-        session.flash({ notification: 'Post deleted!' })
+        if (village !== null) {
+            await village.delete() 
+        }
 
         return response.redirect('/villages')
     }
