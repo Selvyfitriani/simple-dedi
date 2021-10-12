@@ -36,10 +36,10 @@ class AuthController {
             .attempt(email, password)
     }
 
-    async logout({ response, auth }) {
-        const apiToken = auth.getAuthHeader()
+    async logout({ request, response, auth }) {
+        const refreshToken = request.input('refresh_token')
         await auth
-            .revokeTokens([apiToken])
+            .revokeTokens([refreshToken])
 
         return response.send({ message: "Logout Succesfully" })
     }
