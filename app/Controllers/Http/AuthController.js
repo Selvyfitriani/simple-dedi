@@ -3,7 +3,7 @@
 const { validate } = use('Validator')
 const User = use('App/Models/User')
 
-class RegisterController {
+class AuthController {
     async register({ request, response, session }) {
         const body = request.all()
         const rules = {
@@ -29,4 +29,4 @@ class RegisterController {
     }
 }
 
-module.exports = RegisterController
+module.exports = AuthController
