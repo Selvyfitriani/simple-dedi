@@ -134,7 +134,7 @@ module.exports = {
   csrf: {
     enable: true,
     methods: ['POST', 'PUT', 'DELETE'],
-    filterUris: ['/villages/create', '/villages/update', '/villages/delete', '/users/register', '/users/login'],
+    filterUris: ['/villages/create', '/villages/update', '/villages/delete', '/users/register', '/users/login', '/users/logout'],
     cookieOptions: {
       httpOnly: false,
       sameSite: true,

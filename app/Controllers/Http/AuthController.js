@@ -35,6 +35,14 @@ class AuthController {
             .withRefreshToken()
             .attempt(email, password)
     }
+
+    async logout({ response, auth }) {
+        const apiToken = auth.getAuthHeader()
+        await auth
+            .revokeTokens([apiToken])
+
+        return response.send({ message: "Logout Succesfully" })
+    }
 }
 
 module.exports = AuthController
