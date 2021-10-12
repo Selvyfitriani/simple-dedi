@@ -21,9 +21,9 @@ Route.on('/').render('welcome')
 Route.group(() => {
     Route.get('/villages', 'VillageController.index')
     Route.get('/villages/:id', 'VillageController.detail')
-    Route.post('/villages/create', 'VillageController.create')
-    Route.put('/villages/update','VillageController.update')
-    Route.delete('/villages/delete','VillageController.delete')
+    Route.post('/villages/create', 'VillageController.create').middleware(['auth:jwt'])
+    Route.put('/villages/update','VillageController.update').middleware(['auth:jwt'])
+    Route.delete('/villages/delete','VillageController.delete').middleware(['auth:jwt'])
 })
 
 Route.group(() => {
