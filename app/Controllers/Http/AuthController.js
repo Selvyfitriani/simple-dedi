@@ -27,6 +27,14 @@ class AuthController {
 
         return { user: user }
     }
+
+    async login({ request, response, auth }) {
+        const { email, password } = request.all()
+
+        return auth
+            .withRefreshToken()
+            .attempt(email, password)
+    }
 }
 
 module.exports = AuthController
